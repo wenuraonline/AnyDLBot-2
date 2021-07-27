@@ -176,7 +176,7 @@ async def zee5_capture(bot, update):
                 str(update.from_user.id) + ".jpg",
                 Config.CHUNK_SIZE,
                 None,  # bot,
-                script.DOWNLOAD_START,
+                translation.DOWNLOAD_START,
                 update.message_id,
                 update.chat.id
             )   
