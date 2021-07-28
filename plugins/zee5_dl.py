@@ -31,7 +31,7 @@ from hachoir.parser import createParser
 from datetime import datetime
 from PIL import Image
 
-from plugins.helpers import(
+from helper_funcs.database.helpers import(
     progress_for_pyrogram,
     humanbytes,
     headers,
