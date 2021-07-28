@@ -20,7 +20,7 @@ if bool(os.environ.get("WEBHOOK", False)):
 else:
     from config import Config
 
-from translation import translation
+from translation import Translation
 from helper_funcs.database.database import *
 
 from pyrogram import Client, filters
@@ -176,14 +176,14 @@ async def zee5_capture(bot, update):
                 str(update.from_user.id) + ".jpg",
                 Config.CHUNK_SIZE,
                 None,  # bot,
-                translation.DOWNLOAD_START,
+                Translation.DOWNLOAD_START,
                 update.message_id,
                 update.chat.id
             )   
  
             await bot.send_message(
                 chat_id=update.chat.id,
-                text=translation.FORMAT_SELECTION.format(thumbnail),
+                text=Translation.FORMAT_SELECTION.format(thumbnail),
                 reply_markup=reply_markup,
                 parse_mode="html",
                 reply_to_message_id=update.message_id
@@ -227,11 +227,11 @@ async def zee5_execute(bot, update):
         custom_file_name = videoname + ".mp4"
 
         await bot.edit_message_text(
-            text=translation.DOWNLOAD_START,
+            text=Translation.DOWNLOAD_START,
             chat_id=update.message.chat.id,
             message_id=update.message.message_id
         )
-        description = translation.CUSTOM_CAPTION_UL_FILE.format(newname=custom_file_name)
+        description = Translation.CUSTOM_CAPTION_UL_FILE.format(newname=custom_file_name)
 
         tmp_directory_for_each_user = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id)
         if not os.path.isdir(tmp_directory_for_each_user):
@@ -312,12 +312,12 @@ async def zee5_execute(bot, update):
             if file_size > Config.TG_MAX_FILE_SIZE:
                 await bot.edit_message_text(
                     chat_id=update.message.chat.id,
-                    text=translation.RCHD_TG_API_LIMIT.format(time_taken_for_download, humanbytes(file_size)),
+                    text=Translation.RCHD_TG_API_LIMIT.format(time_taken_for_download, humanbytes(file_size)),
                     message_id=update.message.message_id
                 )
             else:
                 await bot.edit_message_text(
-                    text=translation.UPLOAD_START,
+                    text=Translation.UPLOAD_START,
                     chat_id=update.message.chat.id,
                     message_id=update.message.message_id
                 )
@@ -385,7 +385,7 @@ async def zee5_execute(bot, update):
                         reply_to_message_id=update.message.reply_to_message.message_id,
                         progress=progress_for_pyrogram,
                         progress_args=(
-                            translation.UPLOAD_START,
+                            Translation.UPLOAD_START,
                             update.message,
                             start_time
                         )
@@ -405,7 +405,7 @@ async def zee5_execute(bot, update):
                         reply_to_message_id=update.message.reply_to_message.message_id,
                         progress=progress_for_pyrogram,
                         progress_args=(
-                            translation.UPLOAD_START,
+                            Translation.UPLOAD_START,
                             update.message,
                             start_time
                         )
@@ -423,7 +423,7 @@ async def zee5_execute(bot, update):
                     pass
 
                 await bot.edit_message_text(
-                    text=translation.AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS,
+                    text=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS,
                     reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="🤖 𝐓𝐞𝐥𝐞𝐆𝐫𝐚𝐦 𝐁𝐨𝐭𝐋𝐢𝐬𝐭 🤖", url="https://t.me/TGRobot_List")]]),
                     chat_id=update.message.chat.id,
                     message_id=update.message.message_id,
