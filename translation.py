@@ -1,8 +1,8 @@
 class Translation(object):
-    START_TEXT = """Hello! 🙋\n\nThis is a simple Telegram All-In-One Bot. Click /help button to Know More What Can I Do? \n\n**@TheTeleRoid**"""
+    START_TEXT = """Hello! 🙋\n\nThis is a simple Telegram All-In-One Bot. Click /help button to Know More What Can I Do? \n\n@TheTeleRoid"""
     RENAME_403_ERR = "<b>Sorry. You Are Not Permitted To Rename This File.\nAsk In [Support Group](https://t.me/TeleRoid14)</b>"
     ABS_TEXT = " <b>Please Don't Be Selfish.</b>"
-    UPGRADE_TEXT = "<b>This Bot Is Free To Use If U R My  Friend......\n\n**@TheTeleRoid**</b>"
+    UPGRADE_TEXT = "<b>This Bot Is Free To Use If U R My  Friend......\n\n@TheTeleRoid</b>"
     FORMAT_SELECTION = "<b>Select The Desired Format:</b> "
     SET_CUSTOM_USERNAME_PASSWORD = """<b>If You Want To Download Premium Videos, Provide In The Following Format:
 URL | filename | username | password</b>"""
@@ -52,7 +52,7 @@ Send /me To Know Your Current Plan Details"""
 <b>○ Language : Python 3.9</b>
 <b>○ Library : Pyrogram Asyncio</b>
 <b>○ Cloned From : AnyDLBot [Spechide]</b>
-<b>○ Source Code :  <a href="https://github.com/PredatorHackerzZ">𝗖𝗹𝗶𝗰𝗸 𝗛𝗲𝗿𝗲</a></b>
+<b>○ Source Code :  <a href="https://github.com/PredatorHackerzZ/AnyDLBot-2">𝗖𝗹𝗶𝗰𝗸 𝗛𝗲𝗿𝗲</a></b>
 <b>○ Server : <a href='https.heroku.com'>Heroku</a></b>
 <b>○ Build Status : Beta v1</b>"""
     REPLY_TO_DOC_FOR_RENAME_FILE = "<b>Reply to a Telegram Media To /rename With Custom Thumbnail Support.Or Ask In Support Group.</b>"
