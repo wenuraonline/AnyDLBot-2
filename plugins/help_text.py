@@ -33,7 +33,7 @@ def GetExpiryDate(chat_id):
     return expires_at
 
 
-@pyrogram.Client.on_message(pyrogram.filters.command(["help", "about"]))
+@pyrogram.Client.on_message(pyrogram.filters.command(["help"]))
 async def help_user(bot, update):
     forcesub = await ForceSub(bot, update)
     if forcesub == 400:
@@ -96,7 +96,7 @@ async def upgrade(bot, update):
     )
 
 
-@pyrogram.Client.on_message(pyrogram.filters.command(["source"]))
+@pyrogram.Client.on_message(pyrogram.filters.command(["about"]))
 async def help_user(bot, update):
     forcesub = await ForceSub(bot, update)
     if forcesub == 400:
