@@ -5,7 +5,7 @@ hachoir
 numpy
 Pillow
 pyrogram==1.0.7
-https://github.com/prgofficial/pyrogram/archive/asyncio.zip
+https://github.com/pyrogram/pyrogram/archive/asyncio-dev.zip
 requests
 tgcrypto
 youtube-dl
@@ -20,3 +20,9 @@ ffmpeg
 sqlalchemy==1.3.23
 psycopg2-binary
 feedparser
+yt-dlp
+olefile
+filetype
+tldextract
+motor
+https://github.com/Tinche/aiofiles/archive/master.zip
