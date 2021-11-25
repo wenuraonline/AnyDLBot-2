@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# (c) Shrimadhav U K | Modified By > @DC4_WARRIOR
+# (c) © PredatorHackerzZ
 
 # the logging things
 import logging
@@ -15,27 +15,36 @@ import os
 import shutil
 import time
 from datetime import datetime
+
 # the secret configuration specific things
 if bool(os.environ.get("WEBHOOK", False)):
     from sample_config import Config
 else:
     from config import Config
+
 # the Strings used for this "thing"
 from translation import Translation
-from plugins.custom_thumbnail import *
+
+import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
-from pyrogram.types import InputMediaPhoto
+
+from helper_funcs.chat_base import TRChatBase
 from helper_funcs.display_progress import progress_for_pyrogram, humanbytes
+from hachoir.metadata import extractMetadata
+from hachoir.parser import createParser
 # https://stackoverflow.com/a/37631799/4723940
-from database.access import clinton
 from PIL import Image
+from helper_funcs.help_Nekmo_ffmpeg import generate_screen_shots
 
 
 async def youtube_dl_call_back(bot, update):
     cb_data = update.data
     # youtube_dl extractors
     tg_send_type, youtube_dl_format, youtube_dl_ext = cb_data.split("|")
-    save_ytdl_json_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".json"
+    thumb_image_path = Config.DOWNLOAD_LOCATION + \
+        "/" + str(update.from_user.id) + ".jpg"
+    save_ytdl_json_path = Config.DOWNLOAD_LOCATION + \
+        "/" + str(update.from_user.id) + ".json"
     try:
         with open(save_ytdl_json_path, "r", encoding="utf8") as f:
             response_json = json.load(f)
@@ -56,6 +65,14 @@ async def youtube_dl_call_back(bot, update):
         if len(url_parts) == 2:
             youtube_dl_url = url_parts[0]
             custom_file_name = url_parts[1]
+            if len(custom_file_name) > 64:
+                await update.message.reply_text(
+                    Translation.IFLONG_FILE_NAME.format(
+                        alimit="64",
+                        num=len(custom_file_name)
+                    )
+                )
+                return
         elif len(url_parts) == 4:
             youtube_dl_url = url_parts[0]
             custom_file_name = url_parts[1]
@@ -93,9 +110,7 @@ async def youtube_dl_call_back(bot, update):
         chat_id=update.message.chat.id,
         message_id=update.message.message_id
     )
-    user = await bot.get_me()
-    mention = user["mention"]
-    description = Translation.CUSTOM_CAPTION_UL_FILE.format(mention)
+    description = Translation.CUSTOM_CAPTION_UL_FILE
     if "fulltitle" in response_json:
         description = response_json["fulltitle"][0:1021]
         # escape Markdown and special characters
@@ -119,7 +134,7 @@ async def youtube_dl_call_back(bot, update):
     else:
         # command_to_exec = ["yt-dlp", "-f", youtube_dl_format, "--hls-prefer-ffmpeg", "--recode-video", "mp4", "-k", youtube_dl_url, "-o", download_directory]
         minus_f_format = youtube_dl_format
-        if "youtu" in youtube_dl_url:
+        if "youtu" in youtube_dl_url or "zee5" in youtube_dl_url:
             minus_f_format = youtube_dl_format + "+bestaudio"
         command_to_exec = [
             "yt-dlp",
@@ -183,24 +198,71 @@ async def youtube_dl_call_back(bot, update):
                 message_id=update.message.message_id
             )
         else:
+            is_w_f = False
+            images = await generate_screen_shots(
+                download_directory,
+                tmp_directory_for_each_user,
+                is_w_f,
+                Config.DEF_WATER_MARK_FILE,
+                300,
+                9
+            )
+            logger.info(images)
             await bot.edit_message_text(
                 text=Translation.UPLOAD_START,
                 chat_id=update.message.chat.id,
                 message_id=update.message.message_id
             )
-            # ref: message from @Sources_codes
+            # get the correct width, height, and duration for videos greater than 10MB
+            # ref: message from @BotSupport
+            width = 0
+            height = 0
+            duration = 0
+            if tg_send_type != "file":
+                metadata = extractMetadata(createParser(download_directory))
+                if metadata is not None:
+                    if metadata.has("duration"):
+                        duration = metadata.get('duration').seconds
+            # get the correct width, height, and duration for videos greater than 10MB
+            if os.path.exists(thumb_image_path):
+                width = 0
+                height = 0
+                metadata = extractMetadata(createParser(thumb_image_path))
+                if metadata.has("width"):
+                    width = metadata.get("width")
+                if metadata.has("height"):
+                    height = metadata.get("height")
+                if tg_send_type == "vm":
+                    height = width
+                # resize image
+                # ref: https://t.me/PyrogramChat/44663
+                # https://stackoverflow.com/a/21669827/4723940
+                Image.open(thumb_image_path).convert(
+                    "RGB").save(thumb_image_path)
+                img = Image.open(thumb_image_path)
+                # https://stackoverflow.com/a/37631799/4723940
+                # img.thumbnail((90, 90))
+                if tg_send_type == "file":
+                    img.resize((320, height))
+                else:
+                    img.resize((90, height))
+                img.save(thumb_image_path, "JPEG")
+                # https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#create-thumbnails
+            else:
+                thumb_image_path = None
             start_time = time.time()
             # try to upload file
             if tg_send_type == "audio":
-                duration = await Mdata03(download_directory)
-                thumbnail = await Gthumb01(bot, update)
                 await bot.send_audio(
                     chat_id=update.message.chat.id,
                     audio=download_directory,
                     caption=description,
                     parse_mode="HTML",
                     duration=duration,
-                    thumb=thumbnail,
+                    # performer=response_json["uploader"],
+                    # title=response_json["title"],
+                    # reply_markup=reply_markup,
+                    thumb=thumb_image_path,
                     reply_to_message_id=update.message.reply_to_message.message_id,
                     progress=progress_for_pyrogram,
                     progress_args=(
@@ -210,13 +272,13 @@ async def youtube_dl_call_back(bot, update):
                     )
                 )
             elif tg_send_type == "file":
-                thumbnail = await Gthumb01(bot, update)
                 await bot.send_document(
                     chat_id=update.message.chat.id,
                     document=download_directory,
-                    thumb=thumbnail,
+                    thumb=thumb_image_path,
                     caption=description,
                     parse_mode="HTML",
+                    # reply_markup=reply_markup,
                     reply_to_message_id=update.message.reply_to_message.message_id,
                     progress=progress_for_pyrogram,
                     progress_args=(
@@ -226,8 +288,6 @@ async def youtube_dl_call_back(bot, update):
                     )
                 )
             elif tg_send_type == "vm":
-                width, duration = await Mdata02(download_directory)
-                thumbnail = await Gthumb02(bot, update, duration, download_directory)
                 await bot.send_video_note(
                     chat_id=update.message.chat.id,
                     video_note=download_directory,
@@ -243,9 +303,7 @@ async def youtube_dl_call_back(bot, update):
                     )
                 )
             elif tg_send_type == "video":
-                 width, height, duration = await Mdata01(download_directory)
-                 thumbnail = await Gthumb02(bot, update, duration, download_directory)
-                 await bot.send_video(
+                await bot.send_video(
                     chat_id=update.message.chat.id,
                     video=download_directory,
                     caption=description,
@@ -253,8 +311,9 @@ async def youtube_dl_call_back(bot, update):
                     duration=duration,
                     width=width,
                     height=height,
-                    thumb=thumbnail,
                     supports_streaming=True,
+                    # reply_markup=reply_markup,
+                    thumb=thumb_image_path,
                     reply_to_message_id=update.message.reply_to_message.message_id,
                     progress=progress_for_pyrogram,
                     progress_args=(
@@ -267,9 +326,40 @@ async def youtube_dl_call_back(bot, update):
                 logger.info("Did this happen? :\\")
             end_two = datetime.now()
             time_taken_for_upload = (end_two - end_one).seconds
+            #
+            media_album_p = []
+            if images is not None:
+                i = 0
+                caption = "© @MoviesFlixers_DL"
+                if is_w_f:
+                    caption = "/upgrade to Plan D to remove the watermark\n© @MoviesFlixers_DL"
+                for image in images:
+                    if os.path.exists(image):
+                        if i == 0:
+                            media_album_p.append(
+                                pyrogram.types.InputMediaPhoto(
+                                    media=image,
+                                    caption=caption,
+                                    parse_mode="html"
+                                )
+                            )
+                        else:
+                            media_album_p.append(
+                                pyrogram.types.InputMediaPhoto(
+                                    media=image
+                                )
+                            )
+                        i = i + 1
+            await bot.send_media_group(
+                chat_id=update.message.chat.id,
+                disable_notification=True,
+                reply_to_message_id=update.message.message_id,
+                media=media_album_p
+            )
+            #
             try:
                 shutil.rmtree(tmp_directory_for_each_user)
-                os.remove(thumbnail)
+                os.remove(thumb_image_path)
             except:
                 pass
             await bot.edit_message_text(
