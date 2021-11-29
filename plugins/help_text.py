@@ -25,8 +25,6 @@ from helper_funcs.forcesub import ForceSub
 import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
-from helper_funcs.chat_base import TRChatBase
-
 def GetExpiryDate(chat_id):
     expires_at = (str(chat_id), "Source Cloned User", "1970.01.01.12.00.00")
     Config.AUTH_USERS.add(7351948)
@@ -39,7 +37,6 @@ async def help_user(bot, update):
     if forcesub == 400:
         return
     # logger.info(update)
-    TRChatBase(update.from_user.id, update.text, "/help")
     await bot.send_message(
         chat_id=update.chat.id,
         text=Translation.HELP_USER,
@@ -55,7 +52,6 @@ async def get_me_info(bot, update):
     if forcesub == 400:
         return
     # logger.info(update)
-    TRChatBase(update.from_user.id, update.text, "/me")
     chat_id = str(update.from_user.id)
     chat_id, plan_type, expires_at = GetExpiryDate(chat_id)
     await bot.send_message(
@@ -72,7 +68,6 @@ async def start(bot, update):
     if forcesub == 400:
         return
     # logger.info(update)
-    TRChatBase(update.from_user.id, update.text, "/start")
     await bot.send_message(
         chat_id=update.chat.id,
         text=Translation.START_TEXT,
@@ -86,7 +81,6 @@ async def upgrade(bot, update):
     if forcesub == 400:
         return
     # logger.info(update)
-    TRChatBase(update.from_user.id, update.text, "/upgrade")
     await bot.send_message(
         chat_id=update.chat.id,
         text=Translation.UPGRADE_TEXT,
@@ -102,7 +96,6 @@ async def help_user(bot, update):
     if forcesub == 400:
         return
     # logger.info(update)
-    TRChatBase(update.from_user.id, update.text, "/source")
     await bot.send_message(
         chat_id=update.chat.id,
         text=Translation.SOURCE,
