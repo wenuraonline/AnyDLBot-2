@@ -23,7 +23,6 @@ from translation import Translation
 import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
-from helper_funcs.chat_base import TRChatBase
 from helper_funcs.display_progress import progress_for_pyrogram
 
 from hachoir.metadata import extractMetadata
@@ -34,7 +33,6 @@ from PIL import Image
 
 @pyrogram.Client.on_message(pyrogram.filters.command(["converttoaudio"]))
 async def convert_to_audio(bot, update):
-    TRChatBase(update.from_user.id, update.text, "converttoaudio")
     if (update.reply_to_message is not None) and (update.reply_to_message.media is not None) :
         description = Translation.CUSTOM_CAPTION_UL_FILE
         download_location = Config.DOWNLOAD_LOCATION + "/"
