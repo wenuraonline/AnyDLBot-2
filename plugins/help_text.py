@@ -48,22 +48,6 @@ async def get_me_info(bot, update):
     )
 
 
-@pyrogram.Client.on_message(pyrogram.filters.command(["help"]))
-async def help_user(bot, update):
-    forcesub = await ForceSub(bot, update)
-    if forcesub == 400:
-        return
-    # logger.info(update)
-    chat_id = str(update.from_user.id)
-    chat_id, plan_type, expires_at = GetExpiryDate(chat_id)
-    await bot.send_message(
-        chat_id=update.chat.id,
-        text=Translation.HELP_USER.format(chat_id, plan_type, expires_at),
-        parse_mode="html",
-        disable_web_page_preview=True,
-        reply_to_message_id=update.message_id
-    )
-
 @pyrogram.Client.on_message(pyrogram.filters.command(["start"]))
 async def start(bot, update):
     forcesub = await ForceSub(bot, update)
@@ -73,8 +57,8 @@ async def start(bot, update):
     await bot.send_message(
         chat_id=update.chat.id,
         text=Translation.START_TEXT,
-        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="⭕️ 𝐂𝐇𝐀𝐍𝐍𝐄𝐋 ⭕️", url="https://t.me/TeleRoidGroup")], [InlineKeyboardButton(text="🛑 𝐒𝐔𝐏𝐏𝐎𝐑𝐓 🛑", url="https://t.me/TeleRoid14"),
-                                                    InlineKeyboardButton(text="𝐀𝐛𝐨𝐮𝐭 𝐌𝐞𝐡👤", url="https://t.me/TheTeleRoid")]]),
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="⭕️ Channel ⭕️", url="https://t.me/TeleRoidGroup")], [InlineKeyboardButton(text="🛑 Support 🛑", url="https://t.me/TeleRoid14"),
+                                                    InlineKeyboardButton(text="👮 Developer", url="https://t.me/TheTeleRoid")]]),
     )
 
 @pyrogram.Client.on_message(pyrogram.filters.command(["upgrade"]))
@@ -105,3 +89,18 @@ async def help_user(bot, update):
         disable_web_page_preview=True,
         reply_to_message_id=update.message_id
     )
+
+@pyrogram.Client.on_message(pyrogram.filters.command(["help"]))
+async def help_user(bot, update):
+    forcesub = await ForceSub(bot, update)
+    if forcesub == 400:
+        return
+    # logger.info(update)
+    await bot.send_message(
+        chat_id=update.chat.id,
+        text=Translation.HELP_USER,
+        parse_mode="html",
+        disable_web_page_preview=True,
+        reply_to_message_id=update.message_id
+    )
+
