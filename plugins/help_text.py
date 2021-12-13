@@ -77,7 +77,7 @@ async def upgrade(bot, update):
 
 
 @pyrogram.Client.on_message(pyrogram.filters.command(["about"]))
-async def help_user(bot, update):
+async def source(bot, update):
     forcesub = await ForceSub(bot, update)
     if forcesub == 400:
         return
