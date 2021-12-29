@@ -73,10 +73,15 @@ generatescss - Get Screenshot of Telegram Media
 
 - [Me](https://telegram.dog/TeamTeleRoid) 
 
-Added ForceSub
+## Done 
+- [x] Added ForceSub
 
-Added Inline Button
+- [x] Added Inline Button
 
-Adding Broadcast
+## ToDo
 
-Adding Database
+- [] Adding Broadcast
+
+- [] Adding Database
+
+- [] Track User From Database
