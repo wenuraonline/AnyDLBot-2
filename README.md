@@ -8,11 +8,6 @@
 
 An Open Source ALL-In-One Telegram RoBot, that can do lot of things.
 
-## Credits, and Thanks to
-
-* [Dan Tès](https://telegram.dog/haskell) for his [Pyrogram Library](https://github.com/pyrogram/pyrogram)
-* [Yoily](https://telegram.dog/YoilyL) for his [UploaditBot](https://telegram.dog/UploaditBot)
-
 ### Installation
 
 #### The Easy Way
@@ -72,12 +67,6 @@ generatescss - Get Screenshot of Telegram Media
 #### LICENSE
 - GPLv3
 
-### Developer
-
-- [@SpecHide](https://t.me/SpecHide)for [@AnyDLBot](https://t.me/AnyDLBot) 
-
-- [Me](https://telegram.dog/TeamTeleRoid) 
-
 ## Done 
 - [x] Added ForceSub
 
@@ -85,8 +74,20 @@ generatescss - Get Screenshot of Telegram Media
 
 ## ToDo
 
-- [] Adding Broadcast
+-  Adding Broadcast
 
-- [] Adding Database
+-  Adding Database
 
-- [] Track User From Database
+-  Track User From Database
+
+## Credits, and Thanks to
+
+* [Dan Tès](https://telegram.dog/haskell) for his [Pyrogram Library](https://github.com/pyrogram/pyrogram)
+* [Yoily](https://telegram.dog/YoilyL) for his [UploaditBot](https://telegram.dog/UploaditBot)
+
+
+### Developer
+
+- [@SpecHide](https://t.me/SpecHide)for [@AnyDLBot](https://t.me/AnyDLBot) 
+
+- [Me](https://telegram.dog/TeamTeleRoid) 
