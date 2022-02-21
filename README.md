@@ -1,4 +1,9 @@
-## [AnyDLBot](https://telegram.dog/Hx_AnyDLBot)
+<p align="center">
+  <img src="thumb.jpg" alt="AnyDLBot">
+</p>
+<h1 align="center">
+  <b>Any DL Bot</b>
+</h1>
 ---
 
 An Open Source ALL-In-One Telegram RoBot, that can do lot of things.
