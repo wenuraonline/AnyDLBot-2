@@ -33,11 +33,11 @@ URL | filename | username | password</b>"""
 
 😎If You need Private Bot Please Ch3ck @PayForBotz.
 -----------------------------"""
-    HELP_USER = """<b>There Are Multiple Things I Can Do:</b>\n\n <b>All Supported Video Formats of [YTDL](https://rg3.github.io/youtube-dl/supportedsites.html)</b>
+    HELP_USER = """<b>There Are Multiple Things I Can Do:</b>\n\n <b>All Supported Video Formats of [YTDLp]</b>
 
-☞  <b>Upload as file from any HTTP link</b>
+☞  <b>Upload as file from any Direct link</b>
 
-☞  <b>Convert To Streamable Video, any Telegram media.\nReply /converttovideo to Any Doc File</b>
+☞  <b>Convert To Video of TG Media.\nReply /converttovideo to Any Media</b>
 
 ☞  <b>ReName Telegram files, with custom thumbnail support.\nReply /rename To File</b>
 
@@ -50,23 +50,23 @@ Send /me To Know Your Current Plan Details"""
     REPLY_TO_DOC_FOR_SCSS = "<b>Reply to a Telegram Media To Get Screenshots.\n@TheTeleRoid</b>"
     SOURCE = """<b>Hello! You Want to Know More About Me</b>
 
-<b>○ My Name : <i>TeleRoid AnyDLBot</i></b>
+<b>🤖 My Name : <i>TeleRoid AnyDLBot</i></b>
 
-<b>○ Creator : <a href='https://telegram.dog/TheTeleRoid'>This Person</a></b>
+<b>👨‍💻 Creator : <a href='https://telegram.dog/TheTeleRoid'>This Person</a></b>
 
-<b>○ Credits : Everyone In This Journey</b>
+<b>🧛‍♂️ Credits : Everyone In This Journey</b>
 
-<b>○ Language : Python 3.9</b>
+<b>📝 Language : Python 3.9</b>
 
-<b>○ Library : Pyrogram Asyncio</b>
+<b>📚 Library : Pyrogram Asyncio</b>
 
-<b>○ Cloned From : AnyDLBot [Spechide]</b>
+<b>🗂 Cloned From : AnyDLBot [Spechide]</b>
 
-<b>○ Source Code :  <a href="https://github.com/PredatorHackerzZ/AnyDLBot-2">𝗖𝗹𝗶𝗰𝗸 𝗛𝗲𝗿𝗲</a></b>
+<b>🧬 Source Code :  <a href="https://github.com/PredatorHackerzZ/AnyDLBot-2">𝗖𝗹𝗶𝗰𝗸 𝗛𝗲𝗿𝗲</a></b>
 
-<b>○ Server : <a href='https.heroku.com'>Heroku</a></b>
+<b>📡 Server : <a href='https.heroku.com'>Heroku</a></b>
 
-<b>○ Build Status : Beta v1</b>"""
+<b>💡 Build Status : Beta v1</b>"""
     REPLY_TO_DOC_FOR_RENAME_FILE = "<b>Reply to a Telegram Media To /rename With Custom Thumbnail Support.Or Ask In Support Group.</b>"
     AFTER_GET_DL_LINK = "Direct Link <a href='{}'>Generated</a> valid for {} days."
     FF_MPEG_RO_BOT_RE_SURRECT_ED = """Syntax: /trim HH:MM:SS [HH:MM:SS]"""
