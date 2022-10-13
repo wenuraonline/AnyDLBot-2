@@ -50,21 +50,21 @@ Send /me To Know Your Current Plan Details"""
     REPLY_TO_DOC_FOR_SCSS = "<b>Reply to a Telegram Media To Get Screenshots.\n@TheTeleRoid</b>"
     SOURCE = """<b>Hello! You Want to Know More About Me</b>
 
-<b>🤖 My Name : <i>TeleRoid AnyDLBot</i></b>
+<em>🤖 My Name : <i>TeleRoid AnyDLBot</i></em>
 
-<b>👨‍💻 Creator : <a href='https://telegram.dog/TheTeleRoid'>This Person</a></b>
+<em>👨‍💻 Creator : <a href='https://telegram.dog/TheTeleRoid'>This Person</a></em>
 
-<b>🧛‍♂️ Credits : Everyone In This Journey</b>
+<em>🧛‍♂️ Credits : Everyone In This Journey</em>
 
-<b>📝 Language : Python 3.9</b>
+<em>📝 Language : Python 3.9</em>
 
-<b>📚 Library : Pyrogram Asyncio</b>
+<em>📚 Library : Pyrogram Asyncio</em>
 
-<b>🗂 Cloned From : AnyDLBot [Spechide]</b>
+<em>🗂 Cloned From : AnyDLBot [Spechide]</em>
 
-<b>🧬 Source Code :  <a href="https://github.com/PredatorHackerzZ/AnyDLBot-2">𝗖𝗹𝗶𝗰𝗸 𝗛𝗲𝗿𝗲</a></b>
+<em>🧬 Source Code :  <a href="https://github.com/PredatorHackerzZ/AnyDLBot-2">𝗖𝗹𝗶𝗰𝗸 𝗛𝗲𝗿𝗲</a></em>
 
-<b>📡 Server : <a href='https.heroku.com'>Heroku</a></b>
+<em>📡 Server : <a href='https.heroku.com'>Heroku</a></em>
 
 <b>💡 Build Status : Beta v1</b>"""
     REPLY_TO_DOC_FOR_RENAME_FILE = "<b>Reply to a Telegram Media To /rename With Custom Thumbnail Support.Or Ask In Support Group.</b>"
